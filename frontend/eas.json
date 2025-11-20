@@ -1,0 +1,30 @@
+{
+  "cli": {
+    "version": ">= 16.27.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "android": {
+        "node": "20.19.4"
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "node": "20.19.4"
+      }
+    },
+    "production": {
+      "autoIncrement": true,
+      "android": {
+        "node": "20.19.4"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
