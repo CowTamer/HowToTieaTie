@@ -30,16 +30,22 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Run Claude Code Review
+      - name: Run Claude Code
         id: claude
         uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          prompt: |
-            REPO: ${{ github.repository }}
-            PR NUMBER: ${{ github.event.pull_request.number }}
 
-            Review this pull request. This is a Python project using FastAPI, LiteLLM, LangChain, LangSmith, New Relic, MongoDB, Kafka, and Google Cloud Platform.
+          # Optional: Customize the trigger phrase (default: @claude)
+          # trigger_phrase: "/claude"
+
+          # Optional: Trigger when specific user is assigned to an issue
+          # assignee_trigger: "claude-bot"
+
+          # Optional: Configure Claude's behavior with CLI arguments
+          claude_args: |
+            --append-system-prompt 
+             Review this pull request. This is a Python project using FastAPI, LiteLLM, LangChain, LangSmith, New Relic, MongoDB, Kafka, and Google Cloud Platform.
 
             # Code Review Rules
 
@@ -120,6 +126,10 @@ jobs:
             - Immutable classes when possible
             - Pure functions without side effects when possible
 
-          claude_args: |
-              --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"
-
+          # Optional: Advanced settings configuration
+          # settings: |
+          #   {
+          #     "env": {
+          #       "NODE_ENV": "test"
+          #     }
+          #   }
