@@ -15,8 +15,8 @@ jobs:
     if: |
       (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@ninja')) ||
       (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@ninja')) ||
-      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@ninja')) ||
-      (github.event_name == 'issues' && (contains(github.event.issue.body, '@ninja') || contains(github.event.issue.title, '@ninja')))
+      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
+      (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -37,7 +37,7 @@ jobs:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
 
           # Optional: Customize the trigger phrase (default: @claude)
-          trigger_phrase: "@ninja"
+          trigger_phrase: "/claude"
 
           # Optional: Trigger when specific user is assigned to an issue
           # assignee_trigger: "claude-bot"
